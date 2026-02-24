@@ -1,0 +1,12 @@
+[package]
+name = "marbles_tool"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.102"
+eframe = "0.33.3"
+futures-util = "0.3.32"
+serde_json = "1.0.149"
+tokio = { version = "1.49.0", features = ["full"] }
+tokio-tungstenite = { version = "0.28.0", features = ["native-tls"] }
