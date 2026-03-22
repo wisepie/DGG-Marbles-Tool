@@ -25,10 +25,18 @@ impl Usernames {
     }
 
     pub fn new() -> Self {
-        let forbidden_users = ["Bot", "Emotes", "gpt71", "tng69", "wikiboy"]
-            .into_iter()
-            .map(|x| x.to_owned())
-            .collect();
+        let forbidden_users = [
+            "Bot",
+            "Emotes",
+            "tng69",
+            "voy70",
+            "gpt71",
+            "guhpt72",
+            "wikiboy73",
+        ]
+        .into_iter()
+        .map(|x| x.to_owned())
+        .collect();
         Self {
             users: vec![],
             forbidden_users: forbidden_users,
