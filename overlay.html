@@ -40,25 +40,36 @@
   <ul id="list"></ul>
 
   <script>
-    const socket = new WebSocket('ws://127.0.0.1:8881');
-    const list = document.getElementById('list');
+    function connect() {
+      const socket = new WebSocket('ws://127.0.0.1:8881');
+      const list = document.getElementById('list');
 
-    socket.onmessage = function (event) {
-      const data = JSON.parse(event.data);
+      socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
 
-      if (data.type === 'start') {
-        list.innerHTML = '';
-      } else if (data.type === 'user') {
-        const li = document.createElement('li');
-        li.className = 'user';
+        if (data.type === 'start') {
+          list.innerHTML = '';
+        } else if (data.type === 'user') {
+          const li = document.createElement('li');
+          li.className = 'user';
 
-        li.innerHTML = `<span class="nick">${data.nick}</span> joined`;
+          li.innerHTML = `<span class="nick">${data.nick}</span> joined`;
 
-        list.prepend(li);
+          list.prepend(li);
 
-        setTimeout(() => li.remove(), 10000);
+          setTimeout(() => li.remove(), 10000);
+        }
+      };
+      socket.onclose = function (event) {
+        setTimeout(function () {
+          connect();
+        }, 3000);
       }
-    };
+      socket.onerror = function (error) {
+        socket.close();
+      };
+    }
+    connect();
   </script>
 </body>
 
